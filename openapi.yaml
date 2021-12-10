@@ -1,0 +1,473 @@
+openapi: 3.0.3
+info:
+  title: Deliclothes API
+  version: "1.0.0"
+paths:
+
+    /clothes/{gender}/select/{type_clothes}:
+      get:
+        description: Get clothes of specified brand
+        parameters:
+          - in: path
+            name: gender
+            schema:
+              type: string
+            required: true
+            description: Name of brand
+          - in: path
+            name: type_clothes
+            schema:
+              type: string
+            required: true
+            description: Type of clothes
+          - in: query
+            name: offset
+            schema:
+              type: integer
+            required: true
+            description: Offset number for query
+          - in: query
+            name: limit
+            schema:
+              type: integer
+            required: true
+            description: Limit number for query
+        responses:
+          '200':
+            description: Clothes JSON returned from API
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ClothesInfo'
+    
+    /clothes/{brand_name}/get/{type_clothes}:
+      get:
+        description: Get clothes of specified brand
+        parameters:
+          - in: path
+            name: brand_name
+            schema:
+              type: string
+            required: true
+            description: Name of brand
+          - in: path
+            name: type_clothes
+            schema:
+              type: string
+            required: true
+            description: Type of clothes
+          - in: query
+            name: offset
+            schema:
+              type: integer
+            required: true
+            description: Offset number for query
+          - in: query
+            name: limit
+            schema:
+              type: integer
+            required: true
+            description: Limit number for query
+        responses:
+          '200':
+            description: Clothes JSON returned from API
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ClothesInfo'
+    
+    /clothes/home_page_posters_info:
+      get:
+        description: Get brands information to generate posters on home page
+        parameters:
+          - in: query
+            name: offset
+            schema:
+              type: integer
+            required: true
+            description: Offset number for query
+          - in: query
+            name: limit
+            schema:
+              type: integer
+            required: true
+            description: Limit number for query
+        responses:
+          '200':
+            description: Clothes JSON returned from API
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/BrandsPostersInfo'
+    
+    /clothes/{username}/liked:
+      get:
+        description: Get clothes liked of specified user
+        parameters:
+          - in: path
+            name: username
+            schema:
+              type: string
+            required: true
+            description: Username
+          - in: query
+            name: offset
+            schema:
+              type: integer
+            required: true
+            description: Offset number for query
+          - in: query
+            name: limit
+            schema:
+              type: integer
+            required: true
+            description: Limit number for query
+        responses:
+          '200':
+            description: Clothes JSON returned from API
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ClothesInfo'
+                    
+    /clothes/{username}/like:
+      post:
+        description: Make clothe liked of the user
+        parameters:
+          - in: path
+            name: username
+            schema:
+              type: string
+            required: true
+            description: Username
+        requestBody:
+          content:
+            application/json: 
+              schema:
+                type: string
+        responses:
+          '201':
+            description: Clothes JSON returned from API
+            content:
+              application/json:
+                schema:
+                  type: string
+                    
+    /clothes/{username}/{title_clothe}/dislike:
+      delete:
+        description: Make clothe liked of the user
+        parameters:
+          - in: path
+            name: username
+            schema:
+              type: string
+            required: true
+            description: Username
+          - in: path
+            name: title_clothe
+            schema:
+              type: string
+            required: true
+            description: Username
+        responses:
+          '201':
+            description: Clothes JSON returned from API
+            content:
+              application/json:
+                schema:
+                  type: string
+    
+    /username/bag/{username}/clothes_in_the_bag:
+      get:
+        description: Get clothes which user added to the bag
+        parameters:
+          - in: path
+            name: username
+            schema:
+              type: string
+            required: true
+            description: Username
+        responses:
+          '200':
+            description: Clothes JSON returned from API
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ClothesInfo'
+    
+    /username/bag/{username}/add_clothe_to_the_bag:
+      post:
+        description: Add clothe to the bag of the user
+        parameters:
+          - in: path
+            name: username
+            schema:
+              type: string
+            required: true
+            description: Username
+        requestBody:
+          content:
+            application/json: 
+              schema:
+                type: string
+        responses:
+          '201':
+            description: Clothes JSON returned from API
+            content:
+              application/json:
+                schema:
+                  type: string
+    
+    /username/bag/{username}/{title_clothe}/remove_clothe_from_the_bag:
+      delete:
+        description: Add clothe to the bag of the user
+        parameters:
+          - in: path
+            name: username
+            schema:
+              type: string
+            required: true
+            description: Username
+          - in: path
+            name: title_clothe
+            schema:
+              type: string
+            required: true
+            description: Username
+        responses:
+          '200':
+            description: Clothes JSON returned from API
+            content:
+              application/json:
+                schema:
+                  type: string
+    
+    /username/register:
+      post:
+        description: Add clothe to the bag of the user
+        
+        requestBody:
+          content:
+            application/json: 
+              schema:
+                type: string
+        responses:
+          '201':
+            description: Clothes JSON returned from API
+            content:
+              application/json:
+                schema:
+                  items:
+                    $ref: '#/components/schemas/UserRegister'
+    
+    /username/login:
+      post:
+        description: Add clothe to the bag of the user
+        requestBody:
+          content:
+            application/json: 
+              schema:
+                type: string
+        responses:
+          '201':
+            description: Clothes JSON returned from API
+            content:
+              application/json:
+                schema:
+                  items:
+                    $ref: '#/components/schemas/UserLogin'
+    
+    /username/{username}/add_cart:
+      post:
+        description: Add clothe to the bag of the user
+        parameters:
+          - in: path
+            name: username
+            schema:
+              type: string
+            required: true
+            description: Username
+        requestBody:
+          content:
+            application/json: 
+              schema:
+                $ref: '#/components/schemas/UserCart'
+        responses:
+          '201':
+            description: Clothes JSON returned from API
+                    
+    
+    /username/{username}/{title_cart}/remove_cart:
+      delete:
+        description: Add clothe to the bag of the user
+        parameters:
+          - in: path
+            name: username
+            schema:
+              type: string
+            required: true
+            description: Username
+          - in: path
+            name: title_cart
+            schema:
+              type: string
+            required: true
+            description: Username
+        responses:
+          '200':
+            description: Clothes JSON returned from API
+    
+    /username/{username}/pay_order:
+      post:
+        description: Add clothe to the bag of the user
+        parameters:
+          - in: path
+            name: username
+            schema:
+              type: string
+            required: true
+            description: Username
+        requestBody:
+          content:
+            application/json: 
+              schema:
+                $ref: '#/components/schemas/PayOrder'
+        responses:
+          '200':
+            description: Clothes JSON returned from API
+    
+    /username/{username}/get_orders_history:
+      get:
+        description: Add clothe to the bag of the user
+        parameters:
+          - in: path
+            name: username
+            schema:
+              type: string
+            required: true
+            description: Username
+        responses:
+          '201':
+            description: Clothes JSON returned from API
+            content:
+              application/json:
+                schema:
+                  items:
+                    $ref: '#/components/schemas/Orders'
+    
+    
+                    
+                    
+
+components:
+  schemas:
+    ClothesInfo:
+      properties:
+        brand_name: 
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        type_of_clothe:
+          type: string
+        price:
+          type: integer
+        discount_price:
+          type: integer
+        poster_img:
+          type: string
+        images:
+          type: array
+          items: 
+            type: string
+        available_sizes:
+          type: array
+          items:
+            type: string
+        colors:
+          type: array
+          items:
+            type: string
+        liked:
+          type: boolean
+        selected_size:
+          type: string
+            
+    BrandsPostersInfo:
+      properties:
+        brand_name:
+          type: string
+        image: 
+          type: string
+        title_poster:
+          type: string
+        color_title_poster:
+          type: string
+    
+    UserRegister:
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        name:
+          type: string
+        surname:
+          type: string
+        phone_number:
+          type: string
+        country:
+          type: string
+        citty:
+          type: string
+        cap:
+          type: string
+    
+    UserLogin:
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    
+    UserCart:
+      properties:
+        cart_numver:
+          type: string
+        cvc:
+          type: string
+        date:
+          type: string
+        owner:
+          type: string
+        title_cart:
+          type: string
+    
+    PayOrder:
+      properties:
+        cart_title:
+          type: string
+        street_delivery:
+          type: string
+        delivery_date:
+          type: string
+        delivery_hour:
+          type: string
+    
+    Orders:
+      properties:
+        number_order:
+          type: string
+        status:
+          type: boolean
